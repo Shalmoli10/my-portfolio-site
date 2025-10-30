@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shalmoli Ghosh - Optical System Engineer Portfolio</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base styles using Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6; /* Light gray background */
+        }
+
+        /* Fixed Sidebar Styling */
+        @media (min-width: 1024px) {
+            .sidebar {
+                width: 280px; /* Fixed width for the sidebar on desktop */
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: #ffffff; /* White sidebar background */
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            }
+            .content-area {
+                margin-left: 280px; /* Offset main content area by sidebar width */
+            }
+        }
+
+        /* Active Navigation Link Style */
+        .nav-link.active {
+            color: #1d4ed8; /* Blue-600 */
+            font-weight: 600;
+            background-color: #eff6ff; /* Blue-50 */
+            border-left-color: #1d4ed8; /* Blue-600 */
+        }
+        /* Custom list style for experience/projects */
+        .custom-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .custom-list li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- JavaScript for Mobile Menu Toggle and Smooth Scrolling -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling function
+        function scrollToSection(event, targetId) {
+            event.preventDefault();
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                // Scroll to the target element smoothly
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+
+                // Update active link state
+                setActiveLink(targetId);
+
+                // Hide mobile menu after click
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                }
+            }
+        }
+
+        function setActiveLink(activeId) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeLink = document.querySelector(`.nav-link[data-target="${activeId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+
+        // Intersection Observer for highlighting the correct link on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50% 0px', // When the section is roughly in the middle of the viewport
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // The user is currently viewing this section
+                        setActiveLink(entry.target.id);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Set initial active link
+            if (sections.length > 0) {
+                setActiveLink(sections[0].id);
+            }
+        });
+
+    </script>
+
+    <!-- Sidebar (Desktop) / Header (Mobile) -->
+    <header class="sidebar lg:block hidden p-6 border-r border-gray-200">
+        <div class="text-center mb-8">
+            <!-- Updated Initials and Name -->
+            <div class="w-24 h-24 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-white text-3xl font-bold mb-3">SG</div>
+            <h1 class="text-xl font-bold">Shalmoli Ghosh</h1>
+            <p class="text-sm text-gray-500">PhD Candidate | Optical Systems & DSP Engineer</p>
+        </div>
+
+        <nav class="space-y-2">
+            <!-- Navigation Links (updated for new sections) -->
+            <a href="#home" data-target="home" onclick="scrollToSection(event, 'home')" class="nav-link flex items-center p-3 text-base rounded-lg transition duration-150 border-l-4 border-transparent hover:bg-gray-100">
+                <!-- Inline SVG Icon: Home -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Home
+            </a>
+            <a href="#education" data-target="education" onclick="scrollToSection(event, 'education')" class="nav-link flex items-center p-3 text-base rounded-lg transition duration-150 border-l-4 border-transparent hover:bg-gray-100">
+                <!-- Inline SVG Icon: Graduation Cap -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M22 10v6M2 10l10-5 10 5-10 5zM4 16v4M20 16v4"/><line x1="12" y1="15" x2="12" y2="22"/></svg>
+                Education
+            </a>
+            <a href="#skills" data-target="skills" onclick="scrollToSection(event, 'skills')" class="nav-link flex items-center p-3 text-base rounded-lg transition duration-150 border-l-4 border-transparent hover:bg-gray-100">
+                <!-- Inline SVG Icon: Bolt -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Skills
+            </a>
+            <a href="#experience" data-target="experience" onclick="scrollToSection(event, 'experience')" class="nav-link flex items-center p-3 text-base rounded-lg transition duration-150 border-l-4 border-transparent hover:bg-gray-100">
+                <!-- Inline SVG Icon: Briefcase -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                Experience
+            </a>
+            <a href="#research" data-target="research" onclick="scrollToSection(event, 'research')" class="nav-link flex items-center p-3 text-base rounded-lg transition duration-150 border-l-4 border-transparent hover:bg-gray-100">
+                <!-- Inline SVG Icon: Flask -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M14.5 2.5a2.4 2.4 0 0 1 2.2 1.5l.5 1.5h2.3c.6 0 1.1.5 1.1 1.1v6.9a2.2 2.2 0 0 1-2.2 2.2h-15a2.2 2.2 0 0 1-2.2-2.2V6.6c0-.6.5-1.1 1.1-1.1h2.3l.5-1.5a2.4 2.4 0 0 1 2.2-1.5z"/><path d="M5.5 6.5l.5 1.5h12.5l.5-1.5"/><path d="M12 18v4"/><path d="M12 22h4"/><path d="M12 22h-4"/></svg>
+                Research
+            </a>
+            <a href="#publications" data-target="publications" onclick="scrollToSection(event, 'publications')" class="nav-link flex items-center p-3 text-base rounded-lg transition duration-150 border-l-4 border-transparent hover:bg-gray-100">
+                <!-- Inline SVG Icon: Book -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M4 19.5V15a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5"/><path d="M6 19.5c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1V4.5c0-.6.4-1 1-1h1.5l.5.5h12l.5-.5H20c.6 0 1 .4 1 1v15c0 .6-.4 1-1 1h-1a1 1 0 0 1-1-1V15"/><path d="M6 19.5v-13"/><path d="M18 19.5v-13"/></svg>
+                Publications
+            </a>
+            <a href="#contact" data-target="contact" onclick="scrollToSection(event, 'contact')" class="nav-link flex items-center p-3 text-base rounded-lg transition duration-150 border-l-4 border-transparent hover:bg-gray-100">
+                <!-- Inline SVG Icon: Mail -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Contact
+            </a>
+        </nav>
+    </header>
+
+    <!-- Mobile Header -->
+    <div class="lg:hidden sticky top-0 bg-white p-4 flex justify-between items-center shadow-md z-10">
+        <h1 class="text-xl font-bold text-blue-600">Shalmoli's Portfolio</h1>
+        <button onclick="toggleMenu()" class="p-2 rounded-lg hover:bg-gray-100">
+            <!-- Hamburger Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+    </div>
+
+    <!-- Mobile Navigation Menu (Hidden by default) -->
+    <nav id="mobile-menu" class="lg:hidden hidden bg-white shadow-lg p-4 z-10 sticky top-[68px]">
+        <a href="#home" data-target="home" onclick="scrollToSection(event, 'home')" class="nav-link active block p-3 text-base rounded-lg transition duration-150 hover:bg-gray-100">Home</a>
+        <a href="#education" data-target="education" onclick="scrollToSection(event, 'education')" class="nav-link block p-3 text-base rounded-lg transition duration-150 hover:bg-gray-100">Education</a>
+        <a href="#skills" data-target="skills" onclick="scrollToSection(event, 'skills')" class="nav-link block p-3 text-base rounded-lg transition duration-150 hover:bg-gray-100">Skills</a>
+        <a href="#experience" data-target="experience" onclick="scrollToSection(event, 'experience')" class="nav-link block p-3 text-base rounded-lg transition duration-150 hover:bg-gray-100">Experience</a>
+        <a href="#research" data-target="research" onclick="scrollToSection(event, 'research')" class="nav-link block p-3 text-base rounded-lg transition duration-150 hover:bg-gray-100">Research</a>
+        <a href="#publications" data-target="publications" onclick="scrollToSection(event, 'publications')" class="nav-link block p-3 text-base rounded-lg transition duration-150 hover:bg-gray-100">Publications</a>
+        <a href="#contact" data-target="contact" onclick="scrollToSection(event, 'contact')" class="nav-link block p-3 text-base rounded-lg transition duration-150 hover:bg-gray-100">Contact</a>
+    </nav>
+
+
+    <!-- Main Content Area -->
+    <main class="content-area p-4 sm:p-8">
+        <div class="max-w-4xl mx-auto">
+
+            <!-- Home Section -->
+            <section id="home" class="section pt-12 min-h-screen flex items-center bg-white rounded-xl shadow-lg mb-8 p-10">
+                <div class="container mx-auto">
+                    <h2 class="text-4xl sm:text-6xl font-extrabold text-gray-900 mb-4">Shalmoli Ghosh!</h2>
+                    <p class="text-2xl text-blue-600 font-medium mb-6">PhD Candidate | Optical Systems | Digital Signal Processing | Silicon Photonics</p>
+                    <p class="text-lg text-gray-600 max-w-2xl">
+                        A dedicated Electrical Engineering PhD candidate with extensive hands-on experience in optical transceiver charecterization and digital signal processing, high-speed electro-optical testing focused on developing next-generation optical communication systems.
+                    </p>
+                    <div class="mt-8 space-x-4">
+                        <a href="#contact" onclick="scrollToSection(event, 'contact')" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300 shadow-md">Get in Touch</a>
+                        <!-- Linked to a placeholder location for the CV -->
+                        <a href="#" class="inline-block text-blue-600 px-6 py-3 rounded-full border border-blue-600 hover:bg-blue-50 transition duration-300">Download CV</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg mb-8 p-10">
+                <h3 class="text-3xl font-bold mb-6 border-b-2 pb-2 text-blue-600">Education</h3>
+                <div class="space-y-6">
+                    <!-- Education 1 -->
+                    <div class="border-l-4 border-blue-500 pl-4 relative">
+                        <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1"></div>
+                        <p class="text-sm text-gray-500">2026 (Expected)</p>
+                        <h4 class="text-xl font-semibold mt-1">PhD Candidate, Electrical Engineering</h4>
+                        <p class="text-lg text-gray-700">The University of Kansas, Lawrence, KS, United States | GPA: 3.88/4</p>
+                    </div>
+                    <!-- Education 2 -->
+                    <div class="border-l-4 border-blue-500 pl-4 relative">
+                        <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1"></div>
+                        <p class="text-sm text-gray-500">2024</p>
+                        <h4 class="text-xl font-semibold mt-1">MS, Electrical Engineering</h4>
+                        <p class="text-lg text-gray-700">The University of Kansas, Lawrence, KS, United States | GPA: 3.87/4</p>
+                    </div>
+                    <!-- Education 3 -->
+                    <div class="border-l-4 border-blue-500 pl-4 relative">
+                        <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1"></div>
+                        <p class="text-sm text-gray-500">2015</p>
+                        <h4 class="text-xl font-semibold mt-1">B.Tech, Electronics and Instrumentation Engineering</h4>
+                        <p class="text-lg text-gray-700">West Bengal University of Technology, Kolkata, WB, India | GPA: 8.93/10</p>
+                    </div>
+                </div>
+            </section>
+			
+			 <!-- About Section (New content based on resume) -->
+            <section id="about" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg mb-8 p-10">
+                <h3 class="text-3xl font-bold mb-6 border-b-2 pb-2 text-blue-600">About Me</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="text-lg text-gray-700 space-y-4">
+                        <p>I am an ambitious **Electrical Engineering PhD candidate** at the University of Kansas with a deep specialization in **Silicon Photonics** and high-speed electro-optical systems. My background blends rigorous academic research with practical industry experience gained during co-op and internship roles at leading technology firms like **Nokia** and **Openlight Photonics**.</p>
+                        <p>My core expertise lies in the full lifecycle of photonic component development: from **Verilog** and **PCB design (Cadence)** for hardware integration, to advanced simulation using **MATLAB/Simulink**, and hands-on validation using complex test equipment like **Optical Spectrum Analyzers** and **Network Analyzers**.</p>
+                        <p>I am actively seeking full-time R&D or Hardware Engineering roles where I can leverage my expertise in optical communications, high-speed testing, and data analysis to drive innovation.</p>
+                    </div>
+                    <div>
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold mb-3 text-gray-800">Key Information</h4>
+                            <p><strong>Name:</strong> Shalmoli Ghosh</p>
+                            <p><strong>Focus Areas:</strong> Optical Transceivers, Laser Charecterization, Silicon Photonics, Electro-Optical Testing</p>
+                            <p><strong>Current Status:</strong> PhD Candidate, The University of Kansas</p>
+                            <p><strong>Primary Contact:</strong> shalmolighosh@gmail.com</p>
+                            <p><strong>Languages:</strong> English, Bengali, Hindi, Spanish</p>
+                            <div class="mt-4">
+                                <a href="mailto:shalmoli.ghosh@gmail.com" class="inline-block bg-gray-100 text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-150">Email Me</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Skills Section (Based on TECHNICAL SKILLS in PDF) -->
+            <section id="skills" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg mb-8 p-10">
+                <h3 class="text-3xl font-bold mb-8 border-b-2 pb-2 text-blue-600">Technical Expertise & Tooling</h3>
+                
+                <div class="space-y-6">
+                    <!-- Group 1: Programming and Systems -->
+                    <div>
+                        <h4 class="text-xl font-semibold mb-3 text-gray-800 flex items-center">
+                            <span class="text-2xl mr-2">💻</span> Programming, Systems & HDL
+                        </h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-gray-700">
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Python (Numpy, Pandas, Matplotlib)</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">MATLAB / Simulink</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">C</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Verilog (HDL)</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Linux / Git</span>
+							<span class="p-3 bg-gray-50 rounded-lg shadow-sm">Git</span>
+                        </div>
+                    </div>
+
+                    <!-- Group 2: Design and Simulation -->
+                    <div>
+                        <h4 class="text-xl font-semibold mb-3 text-gray-800 flex items-center">
+                            <span class="text-2xl mr-2">📐</span> Design & Simulation Tools
+                        </h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-gray-700">
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Cadence Allegro & OrCAD (PCB Layout)</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Eagle (PCB Layout)</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">CAPTURE CIS (PSpice)</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">KLayout (PIC Layout)</span>
+                        </div>
+                    </div>
+
+                    <!-- Group 3: Test Equipments -->
+                    <div>
+                        <h4 class="text-xl font-semibold mb-3 text-gray-800 flex items-center">
+                            <span class="text-2xl mr-2">🔬</span> Test Equipments
+                        </h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Optical Spectrum Analyzer</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Tunable Lasers/Photodetectors</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">EDFA/SOA/Wavelength Selective Switches</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Oscilloscope/Network Analyzer</span>
+                            <span class="p-3 bg-gray-50 rounded-lg shadow-sm">Wafer Probers & DC/RF Probes</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Professional Experience Section (Co-op and Internship) -->
+            <section id="experience" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg mb-8 p-10">
+                <h3 class="text-3xl font-bold mb-8 border-b-2 pb-2 text-blue-600">Professional Experience</h3>
+
+                <div class="space-y-8">
+                    <!-- Job 1: Nokia -->
+                    <div class="border-l-4 border-blue-500 pl-4 relative">
+                        <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1"></div>
+                        <p class="text-sm text-gray-500">May - Aug 2025</p>
+                        <h4 class="text-xl font-semibold mt-1">Silicon Photonics Co-op</h4>
+                        <p class="text-lg text-gray-700">Nokia</p>
+                        <ul class="custom-list text-gray-600 mt-2 space-y-1">
+                            <li>Characterized insertion loss in 2x2 MMI ring structures at the wafer level; performed statistical analysis to guide R&D design and optimization.</li>
+                            <li>Identified and quantified wavelength alignment discrepancies between manual & automated test stations; drove corrective actions to enhance measurement accuracy.</li>
+                            <li>Evaluated waveguide junction isolation through leakage current analysis to inform and validate critical design choices.</li>
+                            <li>Developed **Python-based automation scripts** to streamline the electro-optical evaluation of PIC optical transceiver components.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 2: Openlight Photonics, Inc. -->
+                    <div class="border-l-4 border-blue-500 pl-4 relative">
+                        <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1"></div>
+                        <p class="text-sm text-gray-500">Jun - Aug 2024</p>
+                        <h4 class="text-xl font-semibold mt-1">Photonic Systems Test Intern</h4>
+                        <p class="text-lg text-gray-700">Openlight Photonics, Inc.</p>
+                        <ul class="custom-list text-gray-600 mt-2 space-y-1">
+                            <li>Configured and characterized PAM4 DSP to generate 200G optical signal for high-speed data transmission.</li>
+                            <li>Conducted high-speed optical and electrical tests on silicon photonic devices, generating 224Gbps TDECQ, OMA, and ER results over wide operating conditions.</li>
+                            <li>Collaborated with the design team to validate experimental data with simulation models, ensuring datacom market success.</li>
+                            <li>Performed 224Gbps loopback BER measurements and tested 112Gbps BER over temperature, supporting the development of the 1.6T program.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Research Section (GRC/GTA and Projects) -->
+            <section id="research" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg mb-8 p-10">
+                <h3 class="text-3xl font-bold mb-8 border-b-2 pb-2 text-blue-600">ResearchProjects</h3>
+                
+                <div class="space-y-8">
+                    <!-- Research Assistant (Center for Communications, Networking and Photonics) -->
+                    <div class="border-l-4 border-blue-500 pl-4 relative">
+                        <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1"></div>
+                        <p class="text-sm text-gray-500">May '21 - Present</p>
+                        <h4 class="text-xl font-semibold mt-1">Graduate Research Assistant</h4>
+                        <p class="text-lg text-gray-700">Center for Communications, Networking and Photonics, KU</p>
+                        <ul class="custom-list text-gray-600 mt-2 space-y-1">
+                            <li>Expertise in heterodyne measurement of optical frequency combs (OFCs) to analyze spectral phase and RF linewidth.</li>
+                            <li>Configured programmable optical filters to achieve a flat output spectrum from SOAs, optimizing performance for future WDM systems.</li>
+                            <li>Investigated properties of a Fabry-Perot QW laser diode, demonstrating potential for a multi-channel coherent optical transmission system spanning 78.3 km of single-mode fiber.</li>
+                            <li>Set up a DP-QPSK Coherent Receiver, enhancing signal reception and decoding capabilities.</li>
+                        </ul>
+                    </div>
+			<!-- Teaching Experience -->
+            <section id="teaching" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg mb-8 p-10">
+                <h3 class="text-3xl font-bold mb-8 border-b-2 pb-2 text-blue-600">Teaching Experience</h3>
+				
+				<div class="space-y-8">
+					<!-- GTA Role -->
+                    <div class="border-l-4 border-gray-400 pl-4 relative">
+                        <div class="absolute w-3 h-3 bg-gray-400 rounded-full -left-[7px] top-1"></div>
+                        <p class="text-sm text-gray-500">Feb '21 - Present (Multiple Terms)</p>
+                        <h4 class="text-xl font-semibold mt-1">Graduate Teaching Assistant</h4>
+                        <p class="text-lg text-gray-700">Dept. of EECS KU</p>
+                        <ul class="custom-list text-gray-600 mt-2 space-y-1">
+                            <li>Led Circuits and Electronics Lab, conducting interactive lab sessions for **100+ students**, emphasizing hands-on learning with electrical lab equipment.</li>
+                            <li>Created engaging lab experiments for the Circuits Lab curriculum, including filter design exercises.</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="text-2xl font-semibold pt-4 mb-4 text-gray-800">Key Work & Academic Projects</h4>
+
+                    <!-- Work Project 1 -->
+                    <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition duration-300">
+                        <h5 class="text-xl font-semibold mb-2">RF Electro-Optical Characterization Automation</h5>
+                        <p class="text-sm text-gray-500 mb-3">Python Test Scripts, S21 Bandwidth, Transceiver Modules</p>
+                        <p class="text-gray-700">Developed and optimized **Python test scripts** for transceiver RF electro-optical characterization, slashing test time by **66% (to 4 hours)** while expanding test features to validate performance across temperature.</p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium mt-2 block">View Details →</a>
+                    </div>
+                    
+                    <!-- Work Project 2 -->
+                    <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition duration-300">
+                        <h5 class="text-xl font-semibold mb-2">High-Speed Photonic Systems Test and Validation</h5>
+                        <p class="text-sm text-gray-500 mb-3">BER, TDECQ, OMA, ER, Electro-Absorption Modulators</p>
+                        <p class="text-gray-700">Conducted extensive characterization of photonics components (Electro-Absorption Modulators), ensuring compatibility with available high-speed electronics ecosystems to meet **$4Tb/s$ datacom and AI/ML bandwidth demands.**</p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium mt-2 block">View Details →</a>
+                    </div>
+
+                    <!-- Academic Project 1 -->
+                    <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition duration-300">
+                        <h5 class="text-xl font-semibold mb-2">LiDAR and Optical Delay Measurement Project</h5>
+                        <p class="text-sm text-gray-500 mb-3">FMCW LIDAR, Chirped Waveforms</p>
+                        <p class="text-gray-700">Developed and implemented an **FMCW LIDAR system** using chirped waveforms to measure optical signal delay, achieving a range resolution of **2.05 meters.**</p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium mt-2 block">View Report →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Publications Section -->
+            <section id="publications" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg mb-8 p-10">
+                <h3 class="text-3xl font-bold mb-8 border-b-2 pb-2 text-blue-600">Publications</h3>
+                
+                <div class="space-y-6 text-gray-700">
+                    <p class="text-lg">
+                        <span class="font-semibold">1. S. Ghosh</span>, S. Raisa, M. O'Sullivan, C. Laperle, and R. Hui, "Application of a High Power Fabry-Perot QW Laser Diode on Multi-Channel Coherent Optical System," in <span class="italic">CLEO 2024, Technical Digest Series</span> (Optica Publishing Group, 2024), paper STh1Q.1.
+                    </p>
+                    <p class="text-lg">
+                        <span class="font-semibold">2. S. Raisa, S. Ghosh</span>, M. O'Sullivan, C. Laperle and R. Hui, "Multi-Channel Coherent Optical System Based on A High Power Fabry-Perot QW Laser Diode," <span class="italic">2024 Optical Fiber Communications Conference and Exhibition (OFC)</span>, San Diego, CA, USA, 2024, pp. 1-3.
+                    </p>
+                </div>
+            </section>
+
+
+            <!-- Contact Section -->
+            <section id="contact" class="section pt-12 pb-16 bg-white rounded-xl shadow-lg p-10">
+                <h3 class="text-3xl font-bold mb-6 border-b-2 pb-2 text-blue-600">Get In Touch</h3>
+                <p class="text-lg text-gray-700 mb-8 max-w-2xl">Feel free to reach out to discuss collaborative research or employment opportunities.</p>
+
+                <div class="space-y-4 max-w-lg mb-8">
+                    <p><strong>Primary Email:</strong> <a href="mailto:shalmoli.ghosh@gmail.com" class="text-blue-600 hover:text-blue-800">shalmoli.ghosh@gmail.com</a></p>
+                    <p><strong>Academic Email:</strong> <a href="mailto:shalmolighosh@ku.edu" class="text-blue-600 hover:text-blue-800">shalmolighosh@ku.edu</a></p>
+                    <p><strong>Phone:</strong> (+1) 785-592-1659</p>
+                </div>
+
+                <form class="space-y-4 max-w-lg">
+                    <!-- ACTION attribute must be added here to send emails using a service like Formspree -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold shadow-md">
+                        Send Message
+                    </button>
+                </form>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center py-6 mt-8 text-gray-500 text-sm border-t border-gray-200">
+                <p>&copy; 2025 Shalmoli Ghosh. All rights reserved.</p>
+            </footer>
+
+        </div>
+    </main>
+</body>
+</html>
